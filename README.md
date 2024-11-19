@@ -50,4 +50,64 @@ note - before running wget command for node exporter change directory to /tmp
 1. installed grafana using rpm package step given on page - https://grafana.com/docs/grafana/latest/setup-grafana/installation/redhat-rhel-fedora/
 2. started using systemd method explained on page - https://grafana.com/docs/grafana/latest/setup-grafana/start-restart-grafana/
 3. did not made aws route53 entries to avoid paying charges.
+
+### reference links
+https://jhooq.com/prometheous-grafan-setup/
+https://www.youtube.com/watch?v=YUabB_7H710
+https://www.youtube.com/watch?v=nJMRmhbY5hY
+https://www.youtube.com/watch?v=9gj9ys_tZpo
+https://www.youtube.com/watch?v=7gW5pSM6dlU
+https://www.youtube.com/@PromLabs/videos  
+
+### linux os concepts
+#### cpu
+first what is an CPU, so that it is clear what we are monitoring - a machine can contain  
+multiple physical processors. each processor can have multiple cores. each core can have  
+multiple hyperthreads. this hyperthread is the most granular "single CPU".  
+An CPU spends time different kind of things. common example being system mode, user mode,  
+iowait mode etc. reference links :-  
+https://www.opsdash.com/blog/cpu-usage-linux.html  
+https://blog.appsignal.com/2018/03/06/understanding-cpu-statistics.html
+
+#### memory
+memory or ram is divided into different parts in linux like - total, used, free, available  
+reference links :-  
+https://www.linuxatemyram.com/
+https://serverfault.com/questions/85470/meaning-of-the-buffers-cache-line-in-the-output-of-free
+https://www.baeldung.com/linux/buffer-vs-cache-memory
+
+### making sense of metrics
+
+#### metric format
+node_cpu_seconds_total{cpu="0",job="node-exporter",instance="localhost:9100", mode!="idle"}  
+to make sense of above metric
+metric_name{label_name_1/key_name_1="value1",label_name_2/key_name_2="value2"}
+so labels are properties or characterstics of a metric and you can it in a query
+avg without(label_name_1) (metric_name{label_name_1/key_name_1="value1",label_name_2/key_name_2="value2"})
+
+#### cpu utilization
+metric name - node_cpu_seconds_total
+first read linux os concepts --> cpu
+This metric is a counter of cpu time since the machine has been started.  
+A Counter means it is always increasing.
+counter needs to be wrapped inside a rate or an irate function.  
+
+#### disk space 
+we track disk space used and available.
+
+#### memory usage
+queries :-  
+1. used memory --> node_memory_MemTotal_bytes{instance="",job=""} - node_memory_MemFree_bytes{instance="",job=""}   - node_memory_Cached_bytes{instance="",job=""} - node_memory_Buffers_bytes{instance="",job=""}
+2. buffers --> node_memory_Buffers_bytes{instance="",job=""}
+3. cached --> node_memory_Cached_bytes{instance="",job=""}
+4. free --> node_memory_MemFree_bytes{instance="",job=""}
+
+#### network traffic
+track received and transmitted network traffic.
+
+### node exporter dashboard
+building the dashboard with essential metrics:-  
+https://www.youtube.com/watch?v=YUabB_7H710
+
+
  
