@@ -58,6 +58,8 @@ https://www.youtube.com/watch?v=nJMRmhbY5hY
 https://www.youtube.com/watch?v=9gj9ys_tZpo
 https://www.youtube.com/watch?v=7gW5pSM6dlU
 https://www.youtube.com/@PromLabs/videos  
+https://www.youtube.com/watch?v=jb9j_IYv4cU
+https://www.youtube.com/watch?v=BjyI93c8ltA
 
 ### linux os concepts
 #### cpu
@@ -108,6 +110,70 @@ track received and transmitted network traffic.
 ### node exporter dashboard
 building the dashboard with essential metrics:-  
 https://www.youtube.com/watch?v=YUabB_7H710
+
+### notes from video - https://www.youtube.com/watch?v=STVMGrYIlfg
+
+### prometheus data model
+* a time series is a numeric value that changes over time. each times series has a name  
+and a set of tags that makes up the key for this time series. time series is stored as  
+a column on disk.
+* Time series are sampled over specific intervals of time. 
+* when building spring-batch-micrometer. we defined scraping job in prometheus. this scraping job is scraping multiple time series from our application like spring_batch_job_active or spring_batch_job_step. from these time series we get stream of samples like 10:15-1; 10:20-2. (timestamp-value)
+* a time series in prometheus world is called metric and keys of that metric are called labels.
+
+### metrics transfer format
+* prometheus operates on pull based format. the service needs to expose an http endpoint.
+* from this endpoint the data needs to be served in a specific format. 
+* format is text based not like json or yaml based.
+* metric_name{label_key="label_value"} CurrentValueOfMetric
+* Each scrape or pull by prometheus only tracks the current value of each metric or time series.
+
+### PromQL
+* data stored by prometheus can be used alerting, dashboarding or ad-hoc debugging.
+* to query data stored PromQL is used.
+* Example - Below metric gives count http requests since the server was started labelled by path, status, method
+* http_request_total{path="/foo", status="500",method="GET"} 233
+* http_request_total{path="/foo", status="200",method="GET"} 602
+* http_request_total{path="/bar", status="200",method="GET"} 1002
+* http_request_total{path="/bar", status="500",method="GET"} 101
+* now to get count of http requests with status 500 across all paths and method. we can do:-
+* http_request_total{status="500"}
+* The above gives the current value across all metrics. This is an absolute count. But a more interesting statistic will be how many 500 errors are occurring per second over a time range. So that we can understand the behavior of our system better. so you can query like:-
+* rate(http_request_total{status="500"}[5m])
+* all you can add dimensions to your query by considering only certain labels and ignoring the rest.
+* sum by (path) (rate(http_requests_total{status="500"} [5m])) - this gives us per path total requests rate with status 500.
+* now we may want to know the percentage of 500 statuses for each path. specially those paths who have 500 statuses for more than 5% of the total requests received. you can do :-
+* sum by (path) (rate(http_requests_total{status="500"} [5m])) /
+* sum by (path) (rate(http_requests_total [5m]))
+* Multiplyby100ToGetAnPercentage 100
+* > 5
+* promql cheat sheet - https://promlabs.com/promql-cheat-sheet/
+
+### Prometheus metric types
+#### Gauges
+* represent a measurement that con go up or down like memory usage or disk space
+* can plot gauges as it is on a graph
+#### Counters
+* they only ever go up and never down. until the process that is publishing it crashes or restarts.
+* counter in itself is rarely used. they are wrapped inside rate, irate, increase methods.
+#### summaries and histograms
+
+### node exporter
+* prometheus ui gives a help text about each of the node exporter metrics
+* 1860 node exporter full grafana dashboard id. 
+* node exporter can publish custom metrics from a file. node-exporter-textfile-collector-script github (https://github.com/prometheus-community/node-exporter-textfile-collector-scripts)
+
+### prometheus mistakes
+* avoid cardinality bombs - by not having a label_key which can have a lot of label_values.
+* try to aggregator functions where possible. in aggregator functions use relevant labels.
+* avoid unscoped metric selector - when using metric name is methods like rate. use labels with metric name.
+* in alerts rules not using "for" duration - like an instancedown rule should "for" duration to include that instancedown==true but for last 5 minutes.
+* functions like rate, irate and increase are applied over counter time series to determine at what rate that time series is going up or down.
+* the above functions take a time range. this time range should not be too small. it should be at least 4 times your scrape interval.
+* incorrect functions with metrics - rate,irate,increase methods are only to be used over counter, not over gauge. value of gauge can go up or down but counter only up.
+* deriv, predict_liner are applied over gauge to determine how fast a gauge is going up or down.
+
+
 
 
  
