@@ -11,8 +11,8 @@ Repo for :-
 * Run https://github.com/rohit23ahuja/dev-ra-spring-batch-micrometer on ec2.
 * Create spring batch dashboard for dev-ra-spring-batch-micrometer.
  
-# Setup
-## AWS Account
+## Setup
+### AWS Account
 1. set aws console account using your email
 2. verify your email
 3. provide your card details
@@ -41,13 +41,13 @@ Repo for :-
 * This script downloads and installs prometheus, node exporter and grafana on ec2 in /tmp/
 
 ### Startup and configuration
-#### Node Exporter
+### Node Exporter
 1. Navigate to node exporter directory in /tmp/
 2. to start ```./node_exporter &```
 3. Default port for node export is 9100. verify if it is running using ```netstat -tulnvp```
 4. If security group in configured correctly, check if metrics are getting exposed. http://EC2PublicIP:9100/metrics
 
-#### Prometheus
+### Prometheus
 1. Navigate to node exporter directory in /tmp/
 2. remove existing ```prometheus.yml```
 3. create new file ```prometheus.yml```
@@ -57,12 +57,11 @@ Repo for :-
 7. If security group in configured correctly, check if prometheus ui is accessible at - http://EC2PublicIP:9090/
 8. Verify nodeexporter and prometheus are present as target on page - http://EC2PublicIP:9090/targets
 
-#### Grafana
+### Grafana
 1. the ```yum rpm``` command should have installed grafana on vm.
 2. run ```sudo systemctl daemon-reload``` and ```sudo systemctl start grafana-server``` to start grafana server.
 3. If security group in configured correctly, check if grafana ui is accessible at - http://EC2PublicIP:3000/.
 4. to verify if grafana is running, we can also use ```sudo systemctl status grafana-server```.
-
 
 ### SSH to EC2
 1. Download and install putty.
@@ -70,7 +69,7 @@ Repo for :-
 3. provide auto login username ```ec2-user``` in section connection-->data.
 4. upload rsa key pair created while launching ec2 instance in section connection-->auth-->credentials.
 
-# Reference Links
+## Reference Links
 * Prometheus, Node exporter installation and configuration - https://www.tothenew.com/blog/step-by-step-setup-grafana-and-prometheus-monitoring-using-node-exporter/
 * https://jhooq.com/prometheous-grafan-setup/
 * https://www.youtube.com/watch?v=YUabB_7H710
@@ -81,8 +80,8 @@ Repo for :-
 * https://www.youtube.com/watch?v=jb9j_IYv4cU
 * https://www.youtube.com/watch?v=BjyI93c8ltA
 
-# Linux OS Concepts
-## CPU
+## Linux OS Concepts
+### CPU
 first what is an CPU, so that it is clear what we are monitoring - a machine can contain  
 multiple physical processors. each processor can have multiple cores. each core can have  
 multiple hyperthreads. this hyperthread is the most granular "single CPU".  
@@ -91,46 +90,46 @@ iowait mode etc. reference links :-
 https://www.opsdash.com/blog/cpu-usage-linux.html  
 https://blog.appsignal.com/2018/03/06/understanding-cpu-statistics.html
 
-## Memory
+### Memory
 memory or ram is divided into different parts in linux like - total, used, free, available  
 reference links :-  
 https://www.linuxatemyram.com/
 https://serverfault.com/questions/85470/meaning-of-the-buffers-cache-line-in-the-output-of-free
 https://www.baeldung.com/linux/buffer-vs-cache-memory
 
-# Prometheus
-## Metric format
+## Prometheus
+### Metric format
 node_cpu_seconds_total{cpu="0",job="node-exporter",instance="localhost:9100", mode!="idle"}  
 to make sense of above metric
 metric_name{label_name_1/key_name_1="value1",label_name_2/key_name_2="value2"}
 so labels are properties or characterstics of a metric and you can it in a query
 avg without(label_name_1) (metric_name{label_name_1/key_name_1="value1",label_name_2/key_name_2="value2"})
 
-## cpu utilization
+### cpu utilization
 metric name - node_cpu_seconds_total
 first read linux os concepts --> cpu
 This metric is a counter of cpu time since the machine has been started.  
 A Counter means it is always increasing.
 counter needs to be wrapped inside a rate or an irate function.  
 
-## disk space 
+### disk space 
 we track disk space used and available.
 
-## memory usage
+### memory usage
 queries :-  
 1. used memory --> node_memory_MemTotal_bytes{instance="",job=""} - node_memory_MemFree_bytes{instance="",job=""}   - node_memory_Cached_bytes{instance="",job=""} - node_memory_Buffers_bytes{instance="",job=""}
 2. buffers --> node_memory_Buffers_bytes{instance="",job=""}
 3. cached --> node_memory_Cached_bytes{instance="",job=""}
 4. free --> node_memory_MemFree_bytes{instance="",job=""}
 
-## network traffic
+### network traffic
 track received and transmitted network traffic.
 
-## node exporter dashboard
+### node exporter dashboard
 building the dashboard with essential metrics:-  
 https://www.youtube.com/watch?v=YUabB_7H710
 
-## notes from video - https://www.youtube.com/watch?v=STVMGrYIlfg
+### notes from video - https://www.youtube.com/watch?v=STVMGrYIlfg
 
 ### prometheus data model
 * a time series is a numeric value that changes over time. each times series has a name  
@@ -191,8 +190,5 @@ a column on disk.
 * the above functions take a time range. this time range should not be too small. it should be at least 4 times your scrape interval.
 * incorrect functions with metrics - rate,irate,increase methods are only to be used over counter, not over gauge. value of gauge can go up or down but counter only up.
 * deriv, predict_liner are applied over gauge to determine how fast a gauge is going up or down.
-
-
-
 
  
