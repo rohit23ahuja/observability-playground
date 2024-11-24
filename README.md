@@ -72,7 +72,7 @@ Repo for :-
 ## Reference Links
 * Prometheus, Node exporter installation and configuration - https://www.tothenew.com/blog/step-by-step-setup-grafana-and-prometheus-monitoring-using-node-exporter/
 * https://jhooq.com/prometheous-grafan-setup/
-* https://www.youtube.com/watch?v=YUabB_7H710
+* Only essential node exporter dashboard from scratch - https://www.youtube.com/watch?v=YUabB_7H710
 * https://www.youtube.com/watch?v=nJMRmhbY5hY
 * https://www.youtube.com/watch?v=9gj9ys_tZpo
 * https://www.youtube.com/watch?v=7gW5pSM6dlU
