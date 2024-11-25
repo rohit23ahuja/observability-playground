@@ -22,10 +22,7 @@
   "links": [],
   "panels": [
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ce4vpbtj7dla8f"
-      },
+      "datasource": "prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -104,10 +101,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ce4vpbtj7dla8f"
-          },
+          "datasource": "prometheus",
           "disableTextWrap": false,
           "editorMode": "code",
           "expr": "avg without(cpu) (irate(node_cpu_seconds_total{job=\"nodeexporter\",instance=\"localhost:9100\",mode!=\"idle\"}[1m]))",
@@ -123,10 +117,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ce4vpbtj7dla8f"
-      },
+      "datasource": "prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -212,10 +203,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ce4vpbtj7dla8f"
-          },
+          "datasource": "prometheus",
           "editorMode": "code",
           "expr": "node_memory_Buffers_bytes{instance=\"localhost:9100\",job=\"nodeexporter\"}",
           "hide": false,
@@ -225,10 +213,7 @@
           "refId": "B"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ce4vpbtj7dla8f"
-          },
+          "datasource": "prometheus",
           "editorMode": "code",
           "expr": "node_memory_Cached_bytes{instance=\"localhost:9100\",job=\"nodeexporter\"}",
           "hide": false,
@@ -238,10 +223,7 @@
           "refId": "C"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ce4vpbtj7dla8f"
-          },
+          "datasource": "prometheus",
           "editorMode": "code",
           "expr": "node_memory_MemFree_bytes{instance=\"localhost:9100\",job=\"nodeexporter\"}",
           "hide": false,
@@ -255,10 +237,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ce4vpbtj7dla8f"
-      },
+      "datasource": "prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -348,10 +327,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ce4vpbtj7dla8f"
-      },
+      "datasource": "prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -441,10 +417,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ce4vpbtj7dla8f"
-      },
+      "datasource": "prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -530,10 +503,7 @@
           "refId": "A"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ce4vpbtj7dla8f"
-          },
+          "datasource": "prometheus",
           "editorMode": "code",
           "expr": "irate(node_network_transmit_bytes_total{job=\"nodeexporter\",instance=\"localhost:9100\"}[5m])",
           "hide": false,
@@ -559,7 +529,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Node Resource Usage",
+  "title": "Node Dashboard",
   "uid": "fe4vxhgbabk00d",
   "version": 11,
   "weekStart": ""
