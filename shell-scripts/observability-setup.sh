@@ -8,8 +8,10 @@ grafana_version="11.3.1"
 pushgateway_version="1.10.0"
 
 update_and_install(){
-yum update -y
-yum install git wget -y
+  yum update -y
+  yum install git wget -y
+  yum install maven -y
+  yum install java-17-amazon-corretto -y
 }
 
 install_and_run_pushgateway(){
@@ -56,9 +58,17 @@ EOF
 }
 
 install_and_run_grafana(){
-sudo yum install -y "https://dl.grafana.com/enterprise/release/grafana-enterprise-$1-1.x86_64.rpm"
-sudo systemctl daemon-reload
-sudo systemctl start grafana-server
+  sudo yum install -y "https://dl.grafana.com/enterprise/release/grafana-enterprise-$1-1.x86_64.rpm"
+  sudo systemctl daemon-reload
+  sudo systemctl start grafana-server
+}
+
+install_application(){
+  cd /tmp/
+  git clone https://github.com/rohit23ahuja/dev-ra-spring-batch-micrometer.git
+  sudo chown -R ec2-user:ec2-user dev-ra-spring-batch-micrometer
+  cd dev-ra-spring-batch-micrometer
+  mvn clean package
 }
 
 update_and_install
@@ -67,4 +77,5 @@ install_and_run_pushgateway "$pushgateway_version" "$arch"
 install_and_run_node_exporter "$nodeexporter_version" "$arch"
 install_and_run_prometheus "$version" "$arch"
 install_and_run_grafana "$grafana_version"
+#install_application
 

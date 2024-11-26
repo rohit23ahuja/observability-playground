@@ -36,6 +36,18 @@ Repo for :-
 5. enable assign public ip option is set.
 6. Navigate to end of Advanced Details on EC2 launch and provide [download-install.sh](shell-scripts/download-install.sh) as User data.
 
+### RDS Launch
+1. Create a security group which :-
+   1. has an inbound rule that allows TCP connections from all IPs on postgres port 5432.
+   2. This is not ideal but still defining it for testing purposes.
+2. Go RDS service, select Postgres engine version.
+3. Select Free tier template for your db
+4. Provide master password for your db.
+5. Attach the created security group to this DB instance.
+6. De select enable performance insights to save on unnecessary costs.
+7. Allow public access 
+8. use pgadmin to test connection to this DB instance from your local machine.
+
 ### Installation on EC2
 * Based on my limited knowledge of shell scripting have created [download-install.sh](shell-scripts/download-install.sh) 
 * This script downloads and installs prometheus, node exporter and grafana on ec2 in /tmp/
