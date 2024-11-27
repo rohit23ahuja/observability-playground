@@ -153,7 +153,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "100 * (1 - avg(rate(node_cpu_seconds_total{mode=\"idle\", instance=\"$node\"}[$__rate_interval])))",
+          "expr": "100 * (1 - avg(rate(node_cpu_seconds_total{mode=\"idle\", instance=\"localhost:9100\", job=\"nodeexporter\"}[1m])))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -223,15 +223,15 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "editorMode": "code",
           "expr": "((node_memory_MemTotal_bytes{instance=\"localhost:9100\", job=\"nodeexporter\"} - node_memory_MemFree_bytes{instance=\"localhost:9100\", job=\"nodeexporter\"}) / node_memory_MemTotal_bytes{instance=\"localhost:9100\", job=\"nodeexporter\"}) * 100",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         },
         {
           "datasource": {
@@ -321,15 +321,15 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "editorMode": "code",
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"localhost:9100\",job=\"nodeexporter\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"localhost:9100\",job=\"nodeexporter\",mountpoint=\"/\",fstype!=\"rootfs\"})",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         }
       ],
       "title": "Root FS Used",
@@ -401,15 +401,15 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "editorMode": "code",
           "expr": "count(count(node_cpu_seconds_total{instance=\"localhost:9100\",job=\"nodeexporter\"}) by (cpu))",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         }
       ],
       "title": "CPU Cores",
@@ -481,15 +481,15 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "editorMode": "code",
           "expr": "node_memory_MemTotal_bytes{instance=\"localhost:9100\",job=\"nodeexporter\"}",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         }
       ],
       "title": "RAM Total",
@@ -565,15 +565,15 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "editorMode": "code",
           "expr": "node_filesystem_size_bytes{instance=\"localhost:9100\",job=\"nodeexporter\",mountpoint=\"/\",fstype!=\"rootfs\"}",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         }
       ],
       "title": "RootFS Total",
@@ -646,15 +646,15 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "editorMode": "code",
           "expr": "node_time_seconds{instance=\"localhost:9100\",job=\"nodeexporter\"} - node_boot_time_seconds{instance=\"localhost:9100\",job=\"nodeexporter\"}",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "refId": "A"
         }
       ],
       "title": "Uptime",
@@ -1068,8 +1068,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1178,8 +1177,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1254,6 +1252,6 @@
   "timezone": "browser",
   "title": "Node Dashboard",
   "uid": "fe4vxhgbabk00d",
-  "version": 14,
+  "version": 3,
   "weekStart": ""
 }

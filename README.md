@@ -203,4 +203,50 @@ a column on disk.
 * incorrect functions with metrics - rate,irate,increase methods are only to be used over counter, not over gauge. value of gauge can go up or down but counter only up.
 * deriv, predict_liner are applied over gauge to determine how fast a gauge is going up or down.
 
+### todo 
+1. node exporter dashboard - fix panels that are not showing data
+2. spring batch dashboard - fix panels that are not showing data
+3. define alerts
+4. fix pushgateway issue
+5. gmail app password
+
+## Alerting 
+### gmail smtp
+1. enable 2 step verification for your google account.
+2. define a app password from your google account. you may call app as Grafana smtp. copy password.
+3. gmail smtp host is : smtp.gmail.com
+4. gmail tls port is 587. and ssl port is 467. we will use tls port
+
+### smtp config grafana
+1. if grafana was installed using yum package manager.
+2. then navigate to /etc/grafana/
+3. edit file grafana.ini
+4. navigate to section [smtp] in this file. make sure these lines are added/modified. rest lines leave as is
+    * enabled = true
+    * host = smtp.gmail.com:587
+    * user = rohit23ahuja@gmail.com
+    * password = wrongpassword
+    * skip_verify = true
+    * from_address = rohit23ahuja@gmail.com
+    * from_name = Grafana
+
+### Contact point
+1. Navigate to grafana ui and set up Contact point using defaults.
+2. send out a test notification to confirm smtp config is working fine.
+
+### Notification policy
+1. define a notification policy in grafana ui.
+2. select the contact point.
+3. provide label as notify = true.
+
+### Alert over panel
+1. Edit the panel, go to alert tab
+2. define threshold value.
+3. define evaluation behavior - pending period, folder, evaluation group.
+4. define label notify=true.
+5. provide email summary.
+
+
+
+
  
