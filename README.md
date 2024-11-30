@@ -246,6 +246,14 @@ a column on disk.
 4. define label notify=true.
 5. provide email summary.
 
+### postgres exporter
+1. https://fatdba.com/2021/03/24/how-to-monitor-your-postgresql-database-using-grafana-prometheus-postgres_exporter/
+2. https://medium.com/@murat.bilal/monitoring-postgresql-with-grafana-and-prometheus-in-docker-7fe6a36ef7b1
+3. https://www.linkedin.com/pulse/data-driven-database-management-monitoring-postgresql-pankaj-salunkhe/
+4. https://www.howtoforge.com/how-to-monitor-postgresql-with-prometheus-and-grafana/
+5. https://github.com/prometheus-community/postgres_exporter
+6. dashboard id - 9628 (preferred), 6742, 14114, 12485
+
 
 
 

@@ -6,6 +6,7 @@ bin_dir="/usr/local/bin"
 nodeexporter_version="1.8.2"
 grafana_version="11.3.1"
 pushgateway_version="1.10.0"
+postgresexporter_version="0.16.0"
 
 update_and_install(){
   yum update -y
@@ -32,6 +33,15 @@ install_and_run_node_exporter(){
   ./node_exporter &
 }
 
+install_and_run_postgres_exporter(){
+  cd /tmp/
+  #wget https://github.com/prometheus-community/postgres_exporter/releases/download/v0.16.0/postgres_exporter-0.16.0.linux-amd64.tar.gz
+  wget "https://github.com/prometheus-community/postgres_exporter/releases/download/v$1/postgres_exporter-$1.$2.tar.gz"
+  tar -xvf "postgres_exporter-$1.$2.tar.gz"
+  sudo chown -R ec2-user:ec2-user "postgres_exporter-$1.$2"
+
+}
+
 install_and_run_prometheus(){
   cd /tmp/
   wget "https://github.com/prometheus/prometheus/releases/download/v$1/prometheus-$1.$2.tar.gz"
@@ -53,6 +63,13 @@ EOF
       - targets: ['localhost:9091']
 EOF
   echo "Added spring batch observability job"
+  cat <<EOF >> prometheus.yml
+  # postgres exporter scraping job.
+  - job_name: "postgresexporter"
+    static_configs:
+      - targets: ['localhost:9187']
+EOF
+  echo "Added postgres exporter scraping job"
 
   ./prometheus &
 }
@@ -75,6 +92,7 @@ update_and_install
 echo "packages updated"
 install_and_run_pushgateway "$pushgateway_version" "$arch"
 install_and_run_node_exporter "$nodeexporter_version" "$arch"
+install_and_run_postgres_exporter "$postgresexporter_version" "$arch"
 install_and_run_prometheus "$version" "$arch"
 install_and_run_grafana "$grafana_version"
 #install_application
