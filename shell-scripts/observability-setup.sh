@@ -39,7 +39,12 @@ install_and_run_postgres_exporter(){
   wget "https://github.com/prometheus-community/postgres_exporter/releases/download/v$1/postgres_exporter-$1.$2.tar.gz"
   tar -xvf "postgres_exporter-$1.$2.tar.gz"
   sudo chown -R ec2-user:ec2-user "postgres_exporter-$1.$2"
-
+  sudo nano postgres_exporter.env
+  sudo chown -R ec2-user:ec2-user postgres_exporter.env
+  cat <<EOF >> postgres_exporter.env
+DATA_SOURCE_NAME="postgresql://postgres:WorngPassword@springbatchobservabilitydb.chcgss0c0vxa.us-east-1.rds.amazonaws.com:5432/?sslmode=disable"
+#DATA_SOURCE_NAME="postgresql://postgres:WorngPassword@springbatchobservabilitydb.chcgss0c0vxa.us-east-1.rds.amazonaws.com:5432/footballdb?sslmode=disable"
+EOF
 }
 
 install_and_run_prometheus(){
