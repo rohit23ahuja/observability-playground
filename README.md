@@ -110,8 +110,7 @@ https://serverfault.com/questions/85470/meaning-of-the-buffers-cache-line-in-the
 https://www.baeldung.com/linux/buffer-vs-cache-memory
 
 ## Time series data
-* a time series is a numeric value that changes over time. each times series has a name and a set of tags that makes up the key for this time series. time series is stored as  
-a column on disk.
+* a time series is a numeric value that changes over time. each times series has a name and a set of tags that makes up the key for this time series. time series is stored as a column on disk.
 * Time series are sampled over specific intervals of time. Example - when building spring-batch-micrometer. we defined scraping job in prometheus. this scraping job is scraping multiple time series from our application like spring_batch_job_active or spring_batch_job_step. from these time series we get stream of samples like 10:15-1; 10:20-2. (timestamp-value)
 * a time series in prometheus world is called metric and keys of that metric are called labels.
 
@@ -123,6 +122,8 @@ a column on disk.
 * metric_name{label_key="label_value"} CurrentValueOfMetric
 * Each scrape or pull by prometheus only tracks the current value of each metric or time series.
 * Prometheus by default stores data in a local disk.
+* Prometheus includes a Time series database. 
+
 
 ### Metric format
 Metrics can be exposed to Prometheus using a simple text based format.
@@ -180,7 +181,7 @@ There are various client libraries that implements Prometheus text based format.
 * example - no. of errors encountered in application.
 
 #### Summaries and Histograms
-* histograms sample the distribution of metric values by counting of events in configurable "buckets". histograms of batch jobs with their execution time as buckets.
+* histograms sample the distribution of metric values by counting of events in configurable "buckets". Example - histograms of batch jobs with their execution time as buckets. Jobs with 10 sec execution time(bucket 1), Jobs with 10-30sec execution time (bucket 2)
 
 ### Prometheus mistakes
 * avoid cardinality bombs - by not having a label_key which can have a lot of label_values.
