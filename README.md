@@ -256,7 +256,7 @@ we track disk space used and available.
 
 ### memory usage
 queries :-  
-1. used memory --> node_memory_MemTotal_bytes{instance="",job=""} - node_memory_MemFree_bytes{instance="",job=""}   - node_memory_Cached_bytes{instance="",job=""} - node_memory_Buffers_bytes{instance="",job=""}
+1. used memory --> node_memory_MemTotal_bytes{instance="",job=""} - node_memory_MemFree_bytes{instance="",job=""}  - node_memory_Cached_bytes{instance="",job=""} - node_memory_Buffers_bytes{instance="",job=""}
 2. buffers --> node_memory_Buffers_bytes{instance="",job=""}
 3. cached --> node_memory_Cached_bytes{instance="",job=""}
 4. free --> node_memory_MemFree_bytes{instance="",job=""}
@@ -270,7 +270,9 @@ https://tech.groww.in/prevent-metrics-explosion-in-prometheus-jmx-exporter-2c7e6
 https://www.openlogic.com/blog/prometheus-java-monitoring-and-gathering-data
 https://grafana.com/blog/2020/06/25/monitoring-java-applications-with-the-prometheus-jmx-exporter-and-grafana/
 https://www.robustperception.io/measuring-java-garbage-collection-with-prometheus/
-
+https://docs.micrometer.io/micrometer/reference/reference/jvm.html
+https://stackoverflow.com/questions/55395769/micrometer-metrics-with-spring-java-no-spring-boot
+https://medium.com/@ruth.kurniawati/detecting-deadlock-with-micrometer-metrics-a8b71ad63cb3
 
 
 
