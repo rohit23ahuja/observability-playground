@@ -264,6 +264,12 @@ queries :-
 ### network traffic
 track received and transmitted network traffic.
 
+## JVM metrics
+https://blog.devops.dev/collecting-metrics-with-jmx-and-prometheus-in-a-java-application-f4364b459692
+https://tech.groww.in/prevent-metrics-explosion-in-prometheus-jmx-exporter-2c7e6c6da8fb
+https://www.openlogic.com/blog/prometheus-java-monitoring-and-gathering-data
+https://grafana.com/blog/2020/06/25/monitoring-java-applications-with-the-prometheus-jmx-exporter-and-grafana/
+https://www.robustperception.io/measuring-java-garbage-collection-with-prometheus/
 
 
 
