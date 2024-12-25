@@ -91,6 +91,7 @@ Repo for :-
 * https://www.youtube.com/@PromLabs/videos
 * https://www.youtube.com/watch?v=jb9j_IYv4cU
 * https://www.youtube.com/watch?v=BjyI93c8ltA
+* https://opeonikute.dev/posts/distributed-tracing-for-batch-workloads -- useful link
 
 ## Linux OS Concepts
 ### CPU
@@ -265,14 +266,17 @@ queries :-
 track received and transmitted network traffic.
 
 ## JVM metrics
-https://blog.devops.dev/collecting-metrics-with-jmx-and-prometheus-in-a-java-application-f4364b459692
-https://tech.groww.in/prevent-metrics-explosion-in-prometheus-jmx-exporter-2c7e6c6da8fb
-https://www.openlogic.com/blog/prometheus-java-monitoring-and-gathering-data
-https://grafana.com/blog/2020/06/25/monitoring-java-applications-with-the-prometheus-jmx-exporter-and-grafana/
-https://www.robustperception.io/measuring-java-garbage-collection-with-prometheus/
-https://docs.micrometer.io/micrometer/reference/reference/jvm.html
-https://stackoverflow.com/questions/55395769/micrometer-metrics-with-spring-java-no-spring-boot
-https://medium.com/@ruth.kurniawati/detecting-deadlock-with-micrometer-metrics-a8b71ad63cb3
+JMX way :-
+* https://blog.devops.dev/collecting-metrics-with-jmx-and-prometheus-in-a-java-application-f4364b459692
+* https://www.openlogic.com/blog/prometheus-java-monitoring-and-gathering-data
+* https://grafana.com/blog/2020/06/25/monitoring-java-applications-with-the-prometheus-jmx-exporter-and-grafana/
+* https://www.robustperception.io/measuring-java-garbage-collection-with-prometheus/
+
+Micrometer way :-
+* https://docs.micrometer.io/micrometer/reference/reference/jvm.html
+* https://stackoverflow.com/questions/55395769/micrometer-metrics-with-spring-java-no-spring-boot
+* https://medium.com/@ruth.kurniawati/detecting-deadlock-with-micrometer-metrics-a8b71ad63cb3
+* https://grafana.com/docs/grafana-cloud/monitor-applications/asserts/enable-prom-metrics-collection/runtimes/java/
 
 
 
