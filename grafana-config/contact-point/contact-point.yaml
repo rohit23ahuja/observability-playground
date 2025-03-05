@@ -1,0 +1,11 @@
+apiVersion: 1
+contactPoints:
+    - orgId: 1
+      name: dev-team
+      receivers:
+        - uid: deex3q3jmqoe8c
+          type: email
+          settings:
+            addresses: rohit23ahuja@gmail.com
+            singleEmail: false
+          disableResolveMessage: true

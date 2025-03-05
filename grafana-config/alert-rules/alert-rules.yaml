@@ -1,0 +1,117 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: tensecond-alerts
+      folder: jobfailure-alerts
+      interval: 10s
+      rules:
+        - uid: eeex6tzttu3uoa
+          title: football-job-failure-alert
+          condition: B
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: deewn76iygd1cf
+              model:
+                editorMode: code
+                expr: app_job_status{jobName="footballJobXml"}
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+          noDataState: KeepLast
+          execErrState: Error
+          for: 10s
+          annotations:
+            summary: |-
+                {{index $labels "jobName"}} has failed or not completed successfully.
+                {{ $labels.jobName }} has failed or not completed successfully.
+          isPaused: false
+          notification_settings:
+            receiver: dev-team
+            group_interval: 1m
+            repeat_interval: 4h
+        - uid: feex6wrrn356oe
+          title: cricket-job-failure-alert
+          condition: B
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: deewn76iygd1cf
+              model:
+                editorMode: code
+                expr: app_job_status{jobName="cricketJobJava"}
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+          noDataState: KeepLast
+          execErrState: Error
+          for: 10s
+          annotations:
+            summary: |-
+                {{index $labels "jobName"}} has failed or not completed successfully.
+                {{ $labels.jobName }} has failed or not completed successfully.
+          isPaused: false
+          notification_settings:
+            receiver: dev-team
+            group_interval: 1m
+            repeat_interval: 4h
