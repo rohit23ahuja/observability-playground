@@ -23,14 +23,18 @@ Repo for :-
 1. create a security group which:-  
     1. has an outbound rule that allows traffic to go out from your server.
     2. has inbound rules that allows incoming :-
-        1. HTTPS traffic on TCP port 443.
-        2. HTTP traffic on TCP port 80.
-        3. SSH on port 22. 
+        1. HTTPS traffic on TCP port 443 from your ip or from everywhere. 
+        2. HTTP traffic on TCP port 80 from your ip or from everywhere.
+        3. SSH on port 22 from your ip or from everywhere. 
         4. on TCP port 9090 for prometheus
         5. on TCP port 9100 for prometheus node exporter 
         6. on TCP port 9091 for prometheus push gateway
         7. on TCP port 3000 for grafana
 2. create a rsa key pair for ec2 user. This will be used by putty for ssh.
+   1. public key is stored on instance. private key stays on your machine.
+   2. key pair can be generated in pem or ppk format. ppk works with putty.
+   3. provide port 22 for ssh in putty.
+   4. provide ppk key downloaded in putty(connection-->ssh-->auth)
 3. select amazon linux 2, architecture 64-bit x86.
 4. rest options will be default mostly, falling under aws free tier. 
 5. enable assign public ip option is set.
